@@ -15,19 +15,19 @@ Este projeto faz parte da disciplina de **Computação Gráfica** e foi desenvol
 ## 🛠️ Tecnologias Utilizadas
 - 🐍 **Python**
 - 🎮 **Pygame** (manipulação de eventos e janelas)
-- 🖥️ **OpenGL** (renderização 3D)
+- 🎥 **OpenGL** (renderização 3D)
 - 📊 **NumPy** (manipulação da matriz do labirinto)
 
 ---
 
 ## 🚀 Como Executar o Projeto
-### **1️⃣ Instale as dependências**
+### **1⃣ Instale as dependências**
 Certifique-se de ter o Python instalado e execute o seguinte comando:
 ```bash
 pip install pygame PyOpenGL numpy
 ```
 
-### **2️⃣ Execute o script**
+### **2⃣ Execute o jogo**
 Após instalar as dependências, rode o jogo com:
 ```bash
 python main.py
@@ -48,9 +48,21 @@ python main.py
 ---
 
 ## 🏗️ Estrutura do Código
-📌 **Renderização 3D**: O labirinto é gerado a partir de uma matriz, onde **1** representa paredes e **0** representa caminhos livres.  
-📌 **Movimentação do Jogador**: Utiliza trigonometria para permitir a navegação no ambiente 3D.  
-📌 **Interação com o Mouse**: O jogador pode girar a câmera movimentando o mouse.
+Para melhorar a organização, o projeto foi dividido nos seguintes arquivos:
+
+```
+Labirinto_3D_CG/
+│── main.py          # Arquivo principal que inicia o jogo
+│── config.py        # Configurações globais (tamanho da tela, FOV, etc.)
+│── player.py        # Classe do jogador (posição, movimentação e câmera)
+│── maze.py          # Geração e renderização do labirinto
+│── renderer.py      # Configura e renderiza a cena OpenGL
+│── README.md        # Documentação do projeto
+```
+
+📉 **Renderização 3D**: O labirinto é gerado a partir de uma matriz, onde **1** representa paredes e **0** representa caminhos livres.  
+📉 **Movimentação do Jogador**: Utiliza trigonometria para permitir a navegação no ambiente 3D.  
+📉 **Interação com o Mouse**: O jogador pode girar a câmera movimentando o mouse.
 
 ---
 
@@ -66,4 +78,5 @@ python main.py
 ---
 
 ## 📜 Licença
-📌 Este projeto é de uso educacional e livre para modificação. Sinta-se à vontade para contribuir! 🎯🚀
+📉 Este projeto é de uso educacional e livre para modificação. Sinta-se à vontade para contribuir! 🎯🚀
+
