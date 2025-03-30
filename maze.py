@@ -44,8 +44,24 @@ def draw_cube(x, y):
     glEnd()
     glEnable(GL_DEPTH_TEST)
 
+def draw_floor(x, y):
+    size = 1
+    glBegin(GL_QUADS)
+    glColor3f(0.3, 0.3, 0.3)
+
+    # Piso
+    glVertex3f(x, 0, y)
+    glVertex3f(x + size, 0, y)
+    glVertex3f(x + size, 0, y + size)
+    glVertex3f(x, 0, y + size)
+
+    glEnd()
+    glEnable(GL_DEPTH_TEST)
+
 def draw_maze(maze):
     for y in range(len(maze)):
         for x in range(len(maze[y])):
             if maze[y][x] == 1:
                 draw_cube(x, y)
+            else:
+                draw_floor(x, y)
