@@ -58,6 +58,21 @@ def draw_floor(x, y):
     glEnd()
     glEnable(GL_DEPTH_TEST)
 
+def set_lightning(mid):
+    glEnable(GL_LIGHTING)
+    glEnable(GL_LIGHT0)
+    glEnable(GL_COLOR_MATERIAL)
+
+    # Configuração da luz
+    position = [mid, mid, 10.0, 0.0]
+    glLightfv(GL_LIGHT0, GL_POSITION, position)
+    diffuse = [0.8, 1.0, 0.8, 1.0]
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse)
+    ambient = [0.15, 0.15, 0.15, 1.0]
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient)
+    specular = [0.4, 0.4, 0.4, 0.4]
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular)
+
 def draw_maze(maze):
     for y in range(len(maze)):
         for x in range(len(maze[y])):
@@ -65,3 +80,4 @@ def draw_maze(maze):
                 draw_cube(x, y)
             else:
                 draw_floor(x, y)
+    set_lightning(len(maze[0])/2)
