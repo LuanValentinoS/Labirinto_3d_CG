@@ -7,9 +7,12 @@ class Player:
         self.x = PLAYER_START_X
         self.y = PLAYER_START_Y
         self.angle = 0
+        self.pitch = 0
 
-    def update_angle(self, dx):
+    def update_angle(self, dx, dy):
         self.angle += dx * MOUSE_SENSITIVITY
+        self.pitch -= dy * MOUSE_SENSITIVITY
+        self.pitch = max(-89, min(89, self.pitch)) 
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
