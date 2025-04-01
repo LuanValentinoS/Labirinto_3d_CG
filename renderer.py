@@ -5,7 +5,7 @@ from OpenGL.GLU import *
 import pygame
 import maze
 from config import WIDTH, HEIGHT, FOV, NEAR_PLANE, FAR_PLANE
-from material import set_material_rugosity
+
 
 def setup_opengl():
     glEnable(GL_TEXTURE_2D)
@@ -43,8 +43,8 @@ def render_scene(player, maze_data):
     dir_z = math.cos(pitch_rad) * math.sin(yaw_rad)
 
     gluLookAt(
-        player.x, 0.5, player.y,
-        player.x + dir_x, 0.5 + dir_y, player.y + dir_z,
+        player.x, 0.4, player.y,
+        player.x + dir_x, 0.4 + dir_y, player.y + dir_z,
         0, 1, 0
     )
 

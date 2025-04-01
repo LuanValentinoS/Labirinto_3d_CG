@@ -4,7 +4,6 @@ import pygame
 from pygame import image
 
 from config import CHEESE_POSITIONS
-from material import set_material_rugosity
 
 # IDs das texturas globais
 wall_texture = None
@@ -13,24 +12,26 @@ floor_texture = None
 def load_textures():
     global wall_texture, floor_texture
 
-    # Textura da parede
+    # parede
     wall_surface = image.load("./assets/wall/Bricks077_1K-JPG_Color.jpg")
     wall_data = pygame.image.tostring(wall_surface, "RGB", True)
     w_width, w_height = wall_surface.get_size()
 
     wall_texture = glGenTextures(1)
     glBindTexture(GL_TEXTURE_2D, wall_texture)
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE) 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w_width, w_height, 0, GL_RGB, GL_UNSIGNED_BYTE, wall_data)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
-    # Textura do chão
+    # chao
     floor_surface = image.load("./assets/floor/PavingStones134_1K-JPG_Color.jpg")
     floor_data = pygame.image.tostring(floor_surface, "RGB", True)
     f_width, f_height = floor_surface.get_size()
 
     floor_texture = glGenTextures(1)
     glBindTexture(GL_TEXTURE_2D, floor_texture)
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE) 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, f_width, f_height, 0, GL_RGB, GL_UNSIGNED_BYTE, floor_data)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
@@ -38,8 +39,6 @@ def load_textures():
 def draw_cube(x, y):
     size = 1
     glColor3f(1, 1, 1)
-
-    set_material_rugosity(5.0)  # ← rugosidade da parede
     glBindTexture(GL_TEXTURE_2D, wall_texture)
     glBegin(GL_QUADS)
 
@@ -79,11 +78,11 @@ def draw_cube(x, y):
     glTexCoord2f(0, 1); glVertex3f(x, size, y + size)
     glEnd()
 
-    # Base (chão) - handled separately in draw_floor_tile()
+    # Base - tratada em draw_floor_tile()
 
+# desenha o chao com a textura
 def draw_floor_tile(x, y):
     glColor3f(1, 1, 1)
-    set_material_rugosity(2.0)  # ← rugosidade do chão
     glBindTexture(GL_TEXTURE_2D, floor_texture)
     glBegin(GL_QUADS)
     glNormal3f(0, 1, 0)
@@ -93,6 +92,7 @@ def draw_floor_tile(x, y):
     glTexCoord2f(0, 1); glVertex3f(x, 0, y + 1)
     glEnd()
 
+# desenha o queijo
 def draw_cheese(x, y):
     glPushMatrix()
     glTranslatef(x + 0.5, 0.1, y + 0.5)
@@ -101,6 +101,7 @@ def draw_cheese(x, y):
     gluSphere(quad, 0.075, 10, 10)
     glPopMatrix()
 
+# desenha o labirinto com os queijos
 def draw_maze_with_cheese(maze):
     for y in range(len(maze)):
         for x in range(len(maze[y])):
