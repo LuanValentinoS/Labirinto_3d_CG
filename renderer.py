@@ -32,7 +32,7 @@ def setup_opengl():
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, [0.1, 0.1, 0.1, 1.0])
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 5.0)
 
-def render_scene(player, maze_data):
+def render_scene(player, maze_data, cheese_angle):
     glLoadIdentity()
 
     pitch_rad = math.radians(player.pitch)
@@ -49,4 +49,4 @@ def render_scene(player, maze_data):
     )
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    maze.draw_maze_with_cheese(maze_data)
+    maze.draw_maze_with_cheese(maze_data, cheese_angle)
