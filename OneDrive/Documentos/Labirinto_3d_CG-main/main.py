@@ -42,6 +42,7 @@ def main():
     pygame.freetype.init()
     font = pygame.freetype.SysFont(None, 32)
     pygame.display.set_mode((WIDTH, HEIGHT), DOUBLEBUF | OPENGL)
+    lives = 3
 
     # Sons
     sound_step = pygame.mixer.Sound("assets/sounds/step.wav")
@@ -66,12 +67,10 @@ def main():
     pygame.event.set_grab(True)
     pygame.mouse.set_visible(False)
 
-    lives = 3
-    collected = 0
+    collected = 0 # contador de queijos
     running = True
-    start_ticks = pygame.time.get_ticks()
-    cheese_angle = 0
-
+    start_ticks = pygame.time.get_ticks() # marca o tempo para o ranking
+    cheese_angle = 0 # angulo inicial do queijo
     while running:
         glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -86,7 +85,7 @@ def main():
             if event.type == MOUSEMOTION:
                 dx, dy = event.rel
                 player.update_angle(dx, dy)
-                player.pitch = max(-45, min(45, player.pitch))
+                player.pitch = max(-45, min(45, player.pitch)) # diminui o pitch
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:  # Pausar o jogo com 'P'
@@ -111,8 +110,6 @@ def main():
                 mx, my = int(cheese[0]), int(cheese[1])
                 MAZE[my][mx] = 0  # Marca o queijo como coletado no mapa
                 
-                
-
 
         if not cheese_positions:
             end_ticks = pygame.time.get_ticks()
@@ -132,7 +129,7 @@ def main():
                     running = False
                     break
                 else:
-                    show_message(f"O gato te pegou! Vidas restantes: {lives}")
+                    show_message(f"O gato te comeu! Vidas restantes: {lives}")
                     player = Player()
 
         render_scene(player, maze, cheese_angle)
@@ -151,7 +148,9 @@ def main():
             x = WIDTH - 74 - i * 68  # Ajuste a posição dos ícones de queijo
             y = 64 + 10
             draw_icon(cheese_icon, x, y)
-
+            
+        draw_text(font, f"Queijos: {collected}/4", WIDTH // 2 - 100, HEIGHT - 60)
+        
         pygame.display.flip()
         pygame.time.wait(10)
 
@@ -199,7 +198,7 @@ def show_ranking(player_time):
     font = pygame.freetype.SysFont(None, 36)
     draw_text(font, "Ranking", 50, 40, (255, 255, 0))
 
-    for i, (date, tempo) in enumerate(parsed[:5]):
+    for i, (date, tempo) in enumerate(parsed[:5]):  # Top 5 dos tempos
         draw_text(font, f"{i+1}. {date} - {tempo:.2f} s", 50, 100 + i * 40, (255, 255, 255))
 
     draw_text(font, f"Seu tempo: {player_time:.2f} segundos", 50, 350, (0, 255, 0))

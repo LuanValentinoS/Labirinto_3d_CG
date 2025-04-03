@@ -29,7 +29,7 @@ for y in range(len(MAZE)):
     for x in range(len(MAZE[y])):
         if MAZE[y][x] == 2:
             CHEESE_POSITIONS.append((x + 0.5, y + 0.5))  # centro do quadrado
-            
+
 # Atualiza o queijo coletado
 def update_cheese_positions_and_map(cheese_pos):
     x, y = cheese_pos
@@ -41,4 +41,3 @@ def update_cheese_positions_and_map(cheese_pos):
     # Atualiza o mapa para remover o queijo
     if MAZE[my][mx] == 2:
         MAZE[my][mx] = 0  # Marca o queijo como removido (caminho livre)
-

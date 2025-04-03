@@ -39,7 +39,6 @@ def render_scene(player, maze_data, cheese_angle):
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
-
     pitch_rad = math.radians(player.pitch)
     yaw_rad = math.radians(player.angle)
 
