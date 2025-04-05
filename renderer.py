@@ -4,7 +4,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import pygame
 import maze
-from config import WIDTH, HEIGHT, FOV, NEAR_PLANE, FAR_PLANE
+from config import WIDTH, HEIGHT, FOV, NEAR_PLANE, FAR_PLANE, CAMERA_HEIGHT
+
 
 
 def setup_opengl():
@@ -43,8 +44,8 @@ def render_scene(player, maze_data, cheese_angle):
     dir_z = math.cos(pitch_rad) * math.sin(yaw_rad)
 
     gluLookAt(
-        player.x, 0.4, player.y,
-        player.x + dir_x, 0.4 + dir_y, player.y + dir_z,
+        player.x, CAMERA_HEIGHT, player.y,
+        player.x + dir_x, CAMERA_HEIGHT + dir_y, player.y + dir_z,
         0, 1, 0
     )
 
