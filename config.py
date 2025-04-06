@@ -4,7 +4,7 @@ FOV = 60  # Campo de visão
 NEAR_PLANE = 0.1
 FAR_PLANE = 50.0
 COLLISION_MARGIN = 0.1
-CAMERA_HEIGHT = 7  # altura da camera
+CAMERA_HEIGHT = 0.15  # altura da camera
 
 PLAYER_START_X = 1.5
 PLAYER_START_Y = 1.5
@@ -15,12 +15,12 @@ MOUSE_SENSITIVITY = 0.08
 MAZE = [
     [1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 2, 0, 1, 0, 2, 1],
-    [1, 0, 1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 0, 1, 1, 0, 1],
     [1, 0, 1, 2, 0, 0, 0, 1],
     [1, 0, 1, 1, 1, 1, 0, 1],
     [1, 0, 0, 1, 2, 1, 0, 1],
     [1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1]
+    [1, 1, 3, 1, 1, 1, 1, 1]
 ]
 
 """

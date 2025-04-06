@@ -9,6 +9,7 @@ class Player:
         self.y = PLAYER_START_Y
         self.angle = 0
         self.pitch = 0
+        self.near_end = False
 
     def update_angle(self, dx, dy):
         self.angle += dx * MOUSE_SENSITIVITY
@@ -44,6 +45,11 @@ class Player:
             self.x += dx
         if not self._is_near_wall(self.x, self.y + dy):
             self.y += dy
+        if self._is_near_end(self.x + dx, self.y) or self._is_near_end(self.x, self.y + dy):
+            self.near_end = True
+        else:
+            self.near_end = False
+
 
     def _is_near_wall(self, x, y):
         """
@@ -60,10 +66,30 @@ class Player:
             grid_x = int(x + offset_x)
             grid_y = int(y + offset_y)
             if 0 <= grid_y < len(MAZE) and 0 <= grid_x < len(MAZE[0]):
-                if MAZE[grid_y][grid_x] == 1:
+                if MAZE[grid_y][grid_x] == 1 or MAZE[grid_y][grid_x] == 3:
                     return True  # Há uma parede próxima, impede o movimento
 
         return False  # Nenhuma parede detectada
+    
+    def _is_near_end(self, x, y):
+        """
+        Similar à função que checa as colisões, esta checa se a colisão é com a toca
+        """
+        check_offsets = [
+            (-COLLISION_MARGIN * 1.5, -COLLISION_MARGIN * 1.5),
+            (COLLISION_MARGIN * 1.5, -COLLISION_MARGIN * 1.5),
+            (-COLLISION_MARGIN * 1.5, COLLISION_MARGIN * 1.5),
+            (COLLISION_MARGIN * 1.5, COLLISION_MARGIN * 1.5),
+        ]
+
+        for offset_x, offset_y in check_offsets:
+            grid_x = int(x + offset_x)
+            grid_y = int(y + offset_y)
+            if 0 <= grid_y < len(MAZE) and 0 <= grid_x < len(MAZE[0]):
+                if MAZE[grid_y][grid_x] == 3:
+                    return True
+
+        return False
 
 
 
