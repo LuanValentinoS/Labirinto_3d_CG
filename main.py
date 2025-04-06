@@ -64,8 +64,25 @@ def main():
 
     cats = [
         Cat((1, 5), (2, 5), cat_model, cat_texture=cat_texture, rotate_angle=0),
-        Cat((5, 1), (5, 3), cat_model, cat_texture=cat_texture, rotate_angle=90),
+        Cat((5, 1), (5, 3), cat_model, cat_texture=cat_texture, rotate_angle=90)
     ]
+
+    # Versão 16x16
+    """
+    cats = [
+    Cat((1, 5), (3, 5), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((2, 7), (2, 8), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((5, 5), (5, 7), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((5, 11), (5, 13), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((7, 6), (8, 6), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 1), (9, 2), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((8, 3), (9, 3), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 4), (10, 4), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 10), (11, 10), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 12), (9, 14), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((12, 2), (12, 5), cat_model, cat_texture=cat_texture, rotate_angle=90)
+    ]
+    """
 
     pygame.event.set_grab(True)
     pygame.mouse.set_visible(False)

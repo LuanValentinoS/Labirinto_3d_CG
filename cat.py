@@ -34,7 +34,7 @@ class Cat:
         target_angle = math.degrees(math.atan2(dx, dy))  # (atenção à ordem dx/dy!)
         # suavizar a rotação
         diff = (target_angle - self.rotate_angle + 180) % 360 - 180
-        self.rotate_angle += diff * 0.1  # suavidade
+        self.rotate_angle += diff * (self.speed * 10)  # suavidade
 
     def draw(self):
         glPushMatrix()
