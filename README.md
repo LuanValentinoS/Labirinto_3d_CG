@@ -5,7 +5,7 @@ Este projeto faz parte da disciplina de **Computação Gráfica** e foi desenvol
 
 👤 **Luan Valentino**  
 👤 **Mahelvson Bazilio**  
-👤 **Jeasiel**  
+👤 **Jeasiel Abner**  
 👤 **Matheus Cavalcante**  
 
 🎯 O objetivo do projeto é criar um **labirinto 3D interativo** utilizando **Python**, **Pygame** e **OpenGL**. O jogador pode explorar o ambiente em primeira pessoa, utilizando controles de teclado e mouse.
@@ -31,8 +31,12 @@ Este projeto faz parte da disciplina de **Computação Gráfica** e foi desenvol
 - Implementou sons para eventos importantes do jogo (andar, coletar queijo, ser pego, fim do jogo)  
 - Desenvolveu um HUD com contador de queijos e barra de vida do rato
 
-💡 **Jeasiel**  
-- (Em andamento) Está desenvolvendo a ampliação do labirinto e a lógica de saída ao pegar todos os queijos (possível buraco na parede ao estilo Tom e Jerry)
+💡 **Jeasiel Abner**  
+- Trabalhou na ampliação do labirinto (não utilizado por problemas de otimização)
+- Desenvolveu a lógica de saída ao pegar todos os queijos para fugir por uma toca (estilo Tom e Jerry)
+- Criou a textura da toca (saída)
+- Reorganizou a estrutura do labirinto
+- Reorganizou a posição e velocidade dos gatos
 
 ---
 
@@ -87,6 +91,7 @@ Labirinto_3D_CG/
 │
 ├── assets/           # Recursos utilizados no jogo
 │   ├── floor/        # Texturas de chão
+│   ├── end/        # Texturas da saída
 │   ├── wall/         # Texturas de parede
 │   ├── models/       # Modelos 3D utilizados
 │   │   ├── cat/      # Modelo 3D do gato
@@ -109,7 +114,6 @@ Labirinto_3D_CG/
 - 💾 **Salvar e carregar progresso** – criar arquivos de save que guardem posição, vida e queijos coletados.
 - 🧠 **IA dos gatos** – tornar os gatos mais inteligentes, seguindo o jogador por som ou visão.
 - ⏱️ **Modo Time Attack** – liberar um modo onde o jogador tem que pegar todos os queijos antes que o tempo acabe.
-- 🕳️ **Animação de saída secreta** – ao pegar todos os queijos, abrir um buraco animado estilo “Tom e Jerry”.
 - 🏅 **Sistema de conquistas** – desbloquear títulos ou medalhas por feitos no jogo (ex: “Pegador de Queijos”, “Ratinho Ninja”).
 - 🌌 **Iluminação dinâmica** – lanternas, sombras realistas ou mudanças de luz com base na posição do jogador.
 - 📱 **Versão mobile** – adaptar os controles para touchscreen e otimizar desempenho.

@@ -3,7 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 class Cat:
-    def __init__(self, pos1, pos2, cat_model, cat_texture, rotate_angle, speed=0.01):
+    def __init__(self, pos1, pos2, cat_model, cat_texture, rotate_angle, speed=0.02):
         self.pos1 = pos1
         self.pos2 = pos2
         self.speed = speed
@@ -34,7 +34,7 @@ class Cat:
         target_angle = math.degrees(math.atan2(dx, dy))  # (atenção à ordem dx/dy!)
         # suavizar a rotação
         diff = (target_angle - self.rotate_angle + 180) % 360 - 180
-        self.rotate_angle += diff * 0.1  # suavidade
+        self.rotate_angle += diff * (self.speed * 10)  # suavidade
 
     def draw(self):
         glPushMatrix()

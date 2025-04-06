@@ -64,8 +64,25 @@ def main():
 
     cats = [
         Cat((1, 5), (2, 5), cat_model, cat_texture=cat_texture, rotate_angle=0),
-        Cat((5, 1), (5, 3), cat_model, cat_texture=cat_texture, rotate_angle=90),
+        Cat((6, 2), (6, 4), cat_model, cat_texture=cat_texture, rotate_angle=90)
     ]
+    """
+    # Versão 16x16
+    
+    cats = [
+    Cat((1, 5), (3, 5), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((2, 7), (2, 8), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((5, 5), (5, 7), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((5, 11), (5, 13), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((7, 6), (8, 6), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 1), (9, 2), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((8, 3), (9, 3), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 4), (10, 4), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 10), (11, 10), cat_model, cat_texture=cat_texture, rotate_angle=0),
+    Cat((9, 12), (9, 14), cat_model, cat_texture=cat_texture, rotate_angle=90),
+    Cat((12, 2), (12, 5), cat_model, cat_texture=cat_texture, rotate_angle=90)
+    ]
+    """
 
     pygame.event.set_grab(True)
     pygame.mouse.set_visible(False)
@@ -74,6 +91,7 @@ def main():
     running = True
     start_ticks = pygame.time.get_ticks()  # marca o tempo para o ranking
     cheese_angle = 0  # angulo inicial do queijo
+    warning = 0
     while running:
         glClearColor(0, 0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -117,11 +135,13 @@ def main():
                 MAZE[my][mx] = 0  # Marca o queijo como coletado no mapa
 
         if not cheese_positions:
-            end_ticks = pygame.time.get_ticks()
-            total_time = (end_ticks - start_ticks) / 1000
-            sound_gameover.play()
-            show_ranking(total_time)
-            running = False
+            if player.near_end:
+                end_ticks = pygame.time.get_ticks()
+                total_time = (end_ticks - start_ticks) / 1000
+                sound_gameover.play()
+                show_ranking(total_time)
+                running = False
+                
 
         for cat in cats:
             cat.update()
@@ -130,11 +150,11 @@ def main():
                 sound_meow.play()
                 if lives <= 0:
                     sound_gameover.play()
-                    show_message("Game Over")
+                    show_message("Game Over",48)
                     running = False
                     break
                 else:
-                    show_message(f"O gato te comeu! Vidas restantes: {lives}")
+                    show_message(f"O gato te comeu! Vidas restantes: {lives}", 48)
                     player = Player()
 
         render_scene(player, maze, cheese_angle)
@@ -162,13 +182,13 @@ def main():
     pygame.quit()
 
 
-def show_message(text):
+def show_message(text, font_size):
     glPushAttrib(GL_ALL_ATTRIB_BITS)
     glDisable(GL_LIGHTING)
     glDisable(GL_DEPTH_TEST)
     glDisable(GL_TEXTURE_2D)
 
-    font = pygame.freetype.SysFont(None, 48)
+    font = pygame.freetype.SysFont(None, font_size)
     surf, _ = font.render(text, (255, 0, 0))
     data = pygame.image.tostring(surf, "RGBA", True)
     glWindowPos2d(WIDTH // 2 - surf.get_width() // 2, HEIGHT // 2)
