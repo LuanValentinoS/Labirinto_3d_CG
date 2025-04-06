@@ -3,7 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 class Cat:
-    def __init__(self, pos1, pos2, cat_model, cat_texture, rotate_angle, speed=0.01):
+    def __init__(self, pos1, pos2, cat_model, cat_texture, rotate_angle, speed=0.02):
         self.pos1 = pos1
         self.pos2 = pos2
         self.speed = speed

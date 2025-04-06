@@ -135,11 +135,7 @@ def main():
                 MAZE[my][mx] = 0  # Marca o queijo como coletado no mapa
 
         if not cheese_positions:
-            if not player.near_end:
-                if warning == 0:
-                    warning = 1
-                    show_message(f"Você pegou todos os queijos! Para terminar o jogo, avance para a toca.", 38)
-            else:
+            if player.near_end:
                 end_ticks = pygame.time.get_ticks()
                 total_time = (end_ticks - start_ticks) / 1000
                 sound_gameover.play()
