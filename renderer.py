@@ -1,11 +1,9 @@
-
 import math
 from OpenGL.GL import *
 from OpenGL.GLU import *
 import pygame
 import maze
 from config import WIDTH, HEIGHT, FOV, NEAR_PLANE, FAR_PLANE, CAMERA_HEIGHT
-
 
 
 def setup_opengl():
@@ -33,7 +31,12 @@ def setup_opengl():
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, [0.1, 0.1, 0.1, 1.0])
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 5.0)
 
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+
 def render_scene(player, maze_data, cheese_angle):
+    glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
     pitch_rad = math.radians(player.pitch)
