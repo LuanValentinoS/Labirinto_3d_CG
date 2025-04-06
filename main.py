@@ -85,10 +85,17 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
-            if event.type == MOUSEMOTION:
+            elif event.type == KEYDOWN and event.key == K_ESCAPE:
+                pygame.mixer.pause()
+                choice = pause_menu(font)
+                pygame.mixer.unpause()
+                if choice == "exit":
+                    running = False
+                    break
+            elif event.type == MOUSEMOTION:
                 dx, dy = event.rel
                 player.update_angle(dx, dy)
-                player.pitch = max(-45, min(45, player.pitch))  # diminui o pitch
+                player.pitch = max(-45, min(45, player.pitch))
 
         player.handle_input()
 
@@ -213,6 +220,39 @@ def show_ranking(player_time):
                 waiting = False
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 waiting = False
+
+
+def pause_menu(font):
+    selected = 0
+    options = ["Voltar ao jogo", "Sair"]
+    waiting = True
+
+    while waiting:
+        glClearColor(0.1, 0.1, 0.1, 1)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        for i, option in enumerate(options):
+            color = (255, 255, 0) if i == selected else (255, 255, 255)
+            draw_text(font, option, WIDTH // 2 - 100, HEIGHT // 2 + i * 40, color)
+
+        draw_text(font, "PAUSADO", WIDTH // 2 - 100, HEIGHT // 2 - 100, (200, 200, 200))
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                return "exit"
+            elif event.type == KEYDOWN:
+                if event.key == K_UP:
+                    selected = (selected - 1) % len(options)
+                elif event.key == K_DOWN:
+                    selected = (selected + 1) % len(options)
+                elif event.key == K_RETURN:
+                    if options[selected] == "Voltar ao jogo":
+                        return "resume"
+                    elif options[selected] == "Sair":
+                        return "exit"
+        pygame.time.wait(100)
+
 
 
 if __name__ == "__main__":
